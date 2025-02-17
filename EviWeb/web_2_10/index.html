@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Behavioral Experiment</title>
+    <script src="https://unpkg.com/jspsych@8.2.0"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-html-keyboard-response@2.1.0"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-image-keyboard-response@2.1.0"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-html-slider-response@2.1.0"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-html-button-response@2.1.0"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-preload@2.1.0"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/seedrandom/3.0.5/seedrandom.min.js"></script>
+    <link
+      href="https://unpkg.com/jspsych@8.2.0/css/jspsych.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <!-- <meta
+      http-equiv="Content-Security-Policy"
+      content="script-src 'self' 'unsafe-eval' https://unpkg.com;"
+    /> -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self';
+               script-src 'self' 'unsafe-eval' https://unpkg.com;
+               style-src 'self' 'unsafe-inline' https://unpkg.com;
+               img-src 'self' data: https://unpkg.com;
+               font-src 'self' data: https://unpkg.com;"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+  <body>
+    <!-- Experiment container will be auto-added by jsPsych -->
+  </body>
+  <!-- Load main experiment script after dependencies -->
+  <script src="code.js"></script>
+</html>
