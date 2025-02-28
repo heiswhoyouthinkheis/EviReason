@@ -658,313 +658,6 @@ const block2Instructions = showInstructions(instructions_2);
 //                                                   Run Trial Fucntion
 // ==================================================================================================================
 // region Run Trial Fucntion
-/**
- * run_case_js creates a two-part trial.
- * @param {Array} case_info - An array with [text1, text2, imageID1, imageID2]
- * @param {Array} slider_text - An array with two labels, e.g. [ "Hormone is absent", "Hormone is present" ]
- * @param {Object} blk_id_record - The block record object to store responses.
- * @returns {Object} A jsPsych timeline object with two slider-response trials.
- */
-
-// // Attempt 1
-// function run_case(case_info, slider_text,blk_id_record) {
-//   // Get keys of the object
-//   const keys = Object.keys(case_info);
-
-//   // Construct image paths. Adjust these paths to match your server structure.
-//   const image_path_1 = "images/causal/duo/" + String(case_info[keys[2]]) + ".png";
-//   const image_path_2 = "images/causal/tri/" + String(case_info[keys[3]]) + ".png";
-
-//   // [disp] Check the image paths
-//   console.log("Image path 1:", image_path_1);
-
-//   // Local variable to store responses for this case
-//   let responses = [];
-
-//   // --- First subcase trial ---
-//   const trial1 = {
-//     type: jsPsychHtmlSliderResponse,
-//     stimulus: function() {
-//       return `
-//         <div style="text-align: left; margin: 20px;">
-//           <p style="font-size: 20px;">${case_info[keys[0]]}</p>
-//           <div style="text-align:center; margin: 20px;">
-//             <img src="${image_path_1}" style="width:360px; height:160px;">
-//           </div>
-//           <p style="font-size: 20px;">Drag the slider until you find your estimate.</p>
-//         </div>
-//       `;
-//     },
-//     labels: slider_text,
-//     min: 0,
-//     max: 1,
-//     start: 0.5,
-//     slider_width: 800,
-//     require_movement: true, // forces participants to adjust the slider before proceeding
-//     button_label: "Continue",
-//     response_ends_trial: true,
-//     on_finish: function(data) {
-//       // Save the first slider response (as a number)
-//       responses[0] = parseFloat(data.response);
-//     }
-//   };
-
-//   // --- Second subcase trial ---
-//   const trial2 = {
-//     type: jsPsychHtmlSliderResponse,
-//     stimulus: function() {
-//       return `
-//         <div style="text-align: left; margin: 20px;">
-//           <p style="font-size: 20px;">${case_info[keys[0]]}</p>
-//           <div style="text-align:center; margin: 20px;">
-//             <img src="${image_path_1}" style="width:360px; height:160px; margin-right:20px;">
-//             <img src="${image_path_2}" style="width:560px; height:160px;">
-//           </div>
-//           <p style="font-size: 20px;">${case_info[keys[1]]}</p>
-//           <p style="font-size: 20px;">Drag the slider until you find your estimate.</p>
-//         </div>
-//       `;
-//     },
-//     labels: slider_text,
-//     min: 0,
-//     max: 1,
-//     start: 0.5,
-//     slider_width: 800,
-//     require_movement: true,
-//     button_label: "Continue",
-//     response_ends_trial: true,
-//     on_finish: function(data) {
-//       // Save the second slider response
-//       responses[1] = parseFloat(data.response);
-//     }
-//   };
-
-//   // Create a timeline that runs trial1 then trial2 in sequence.
-//   const case_timeline = {
-//     timeline: [trial1, trial2],
-//     on_finish: function() {
-//       // After both trials have finished, store the ordered pair of responses
-//       // Here we assume we're updating blk_1_record. Modify as needed for your block.
-//       blk_id_record.probabilities.push([responses[0], responses[1]]);
-//       console.log("Stored responses (ordered pair):", [responses[0], responses[1]]);
-//     }
-//   };
-
-//   return case_timeline;
-// }
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-console.log("xxx");
-
-// Attempt 2
-
-// function run_case(case_info, slider_text, blk_id_record) {
-//   // Get keys of the object
-//   const keys = Object.keys(case_info);
-
-//   // Construct image paths (adjust as needed)
-//   const image_path_1 = "images/causal/duo/" + String(case_info[keys[2]]) + ".png";
-//   const image_path_2 = "images/causal/tri/" + String(case_info[keys[3]]) + ".png";
-
-//   // Local variable to store responses for this case
-//   let responses = [];
-
-//   // --- First subcase trial ---
-//   const trial1 = {
-//     type: jsPsychHtmlSliderResponse,
-
-//     // Give the slider a unique ID so we can locate it in on_load
-//     slider_id: "slider1",
-
-//     // Provide text + image layout (image left, text right)
-//     // stimulus: () => {
-//     //   return `
-//     //     <div style="display: flex; flex-direction: row; align-items: flex-start; margin: 20px;">
-//     //       <!-- Image on the left, preserving aspect ratio -->
-//     //       <img src="${image_path_1}" style="max-width: 300px; height: auto; margin-right: 20px;" />
-
-//     //       <!-- Text on the right -->
-//     //       <div style="max-width: 700px;">
-//     //         <p style="font-size: 20px;">${case_info[keys[0]]}</p>
-//     //       </div>
-//     //     </div>
-//     //   `;
-//     // },
-//     // Provide text + image layout (image left, text right)
-//     stimulus: () => {
-//       return `
-//         <div style="display: flex; flex-direction: row; align-items: flex-start; margin: 20px; height: 60vh;">
-//           <!-- Image on the left, preserving aspect ratio -->
-//           <img src="${image_path_1}" style="max-width: 300px; height: auto; margin-right: 20px;" />
-
-//           <!-- Text on the right -->
-//           <div style="max-width: 700px;">
-//             <p style="font-size: 20px;">${case_info[keys[0]]}</p>
-//           </div>
-//         </div>
-//       `;
-//     },
-
-//     // Show text under thae slider: “estimated probability: 0.50”
-//     prompt: `
-//       <p style="font-size: 16px;">
-//         Estimated probability: <span id="slider-value-display-1">0.50</span>
-//       </p>
-//     `,
-
-//     labels: slider_text,   // e.g. ["Absent", "Present"]
-//     min: 0,
-//     max: 1,
-//     step: 0.01,           // granularity of 0.01
-//     start: 0.5,           // default slider value
-//     slider_width: 800,
-//     require_movement: true, // must move slider before continue
-//     button_label: "Continue",
-//     response_ends_trial: true,
-
-//   //   prompt: `
-//   //   <div style="display: flex; flex-direction: column; align-items: center; margin-top: 20px;">
-//   //   <input type="range" id="slider1" min="0" max="1" step="0.01" value="0.5" style="width: 800px; margin-bottom: 10px;">
-//   //   <p style="font-size: 16px;">
-//   //     Estimated probability: <span id="slider-value-display-1">0.50</span>
-//   //   </p>
-//   //   </div>
-//   // `,
-
-//   //   labels: slider_text,   // e.g. ["Absent", "Present"]
-//   //   min: 0,
-//   //   max: 1,
-//   //   step: 0.01,           // granularity of 0.01
-//   //   start: 0.5,           // default slider value
-//   //   slider_width: 800,
-//   //   require_movement: true, // must move slider before continue
-//   //   button_label: "Continue",
-//   //   response_ends_trial: true,
-
-//     on_load: function () {
-//       // Find the slider by its ID
-//       const sliderEl = document.getElementById("slider1");
-//       // Find the span displaying the value
-//       const displayEl = document.getElementById("slider-value-display-1");
-
-//       if (sliderEl && displayEl) {
-//         // If you want to ensure step is set (it should already be .01)
-//         sliderEl.step = 0.01;
-
-//         // Update displayed value on slider input
-//         sliderEl.addEventListener("input", () => {
-//           const val = parseFloat(sliderEl.value).toFixed(2);
-//           displayEl.textContent = val;
-//         });
-//       }
-//     },
-
-//     on_finish: function (data) {
-//       // Save the first slider response
-//       responses[0] = parseFloat(data.response);
-//     },
-//   };
-
-//   // --- Second subcase trial ---
-//   const trial2 = {
-//     type: jsPsychHtmlSliderResponse,
-
-//     slider_id: "slider2",
-
-//     stimulus: function () {
-//       return `
-//         <div style="display: flex; flex-direction: column; align-items: center; height: 100vh; justify-content: space-between;">
-//           <!-- Upper half: First item -->
-//           <div style="display: flex; flex-direction: row; align-items: flex-start; margin: 20px; height: 45vh;">
-//             <!-- Image on the left, preserving aspect ratio -->
-//             <img src="${image_path_1}" style="max-width: 300px; height: auto; margin-right: 20px;" />
-
-//             <!-- Text on the right -->
-//             <div style="max-width: 700px;">
-//               <p style="font-size: 20px;">${case_info[keys[0]]}</p>
-//             </div>
-//           </div>
-
-//           <!-- Lower half: Second item -->
-//           <div style="display: flex; flex-direction: row; align-items: flex-start; margin: 20px; height: 45vh;">
-//             <!-- Second image -->
-//             <img src="${image_path_2}" style="max-width: 200px; height: auto; margin-right: 20px;" />
-
-//             <!-- Text -->
-//             <div style="max-width: 700px;">
-//               <p style="font-size: 20px;">${case_info[keys[1]]}</p>
-//             </div>
-//           </div>
-//         </div>
-//       `;
-//     },
-
-//     prompt: `
-//       <p style="font-size: 16px;">
-//         Estimated probability: <span id="slider-value-display-2">0.50</span>
-//       </p>
-//     `,
-
-//     labels: slider_text,
-//     min: 0,
-//     max: 1,
-//     step: 0.01,
-//     start: 0.5,
-//     slider_width: 800,
-//     require_movement: true,
-//     button_label: "Continue",
-//     response_ends_trial: true,
-
-//     on_load: function () {
-//       const sliderEl = document.getElementById("slider2");
-//       const displayEl = document.getElementById("slider-value-display-2");
-
-//       if (sliderEl && displayEl) {
-//         sliderEl.step = 0.01;
-
-//         sliderEl.addEventListener("input", () => {
-//           const val = parseFloat(sliderEl.value).toFixed(2);
-//           displayEl.textContent = val;
-//         });
-//       }
-//     },
-
-//     on_finish: function (data) {
-//       // Save the second slider response
-//       responses[1] = parseFloat(data.response);
-//     },
-//   };
-
-//   // Create a timeline that runs trial1 then trial2 in sequence
-//   const case_timeline = {
-//     timeline: [trial1, trial2],
-//     on_finish: function () {
-//       // After both trials finish, store the ordered pair
-//       blk_id_record.probabilities.push([responses[0], responses[1]]);
-//       console.log("Stored responses (ordered pair):", [responses[0], responses[1]]);
-//     },
-//   };
-
-//   return case_timeline;
-// }
-
-console.log("xxx");
-
-// Attempt 3
 
 /**
  * run_case: Displays two subcases on the same page (top half and bottom half).
@@ -1002,6 +695,7 @@ function run_case(case_info, slider_text, blk_id_record) {
       height: 100vh;
       justify-content: space-evenly; /* space them out vertically */
       align-items: center;           /* center them horizontally */
+      white-space: pre-line;         /* allow line breaks in text */
       margin: 0 auto;
       box-sizing: border-box;
     }
@@ -1147,7 +841,7 @@ function run_case(case_info, slider_text, blk_id_record) {
       continue2.addEventListener("click", () => {
         responses[1] = parseFloat(slider2.value);
         // Now we can end the trial and store data
-        jsPsych.finishTrial({
+        psych.finishTrial({
           responses: responses,
         });
       });
@@ -1163,9 +857,14 @@ function run_case(case_info, slider_text, blk_id_record) {
   return singleTrial;
 }
 
-console.log("xxxxxx", blk_1[conditions[0]]);
+// #endregion
 
-// Add to jsPsych timeline
+// =================================================================================================================
+//                                                  Construct Timeline
+// =================================================================================================================
+// region Construct Timeline
+
+// Initialize jsPsych timeline
 const timeline = [];
 
 timeline.push({
@@ -1176,19 +875,53 @@ timeline.push({
   choices: [" "],
 });
 
-// timeline.push(...block1Instructions); // Add Block 1 instructions
-// Add Block 1 trials here
+// Block 1 instructions
+timeline.push(...block1Instructions);
 
-oneCase = run_case(
-  blk_1[conditions[0]],
-  ["Hormone is absent", "Hormone is present"],
-  blk_1_record
-);
+// Block 1 trials here
+Object.keys(blk_1).forEach((key) => {
+  // For each key in blk_1, create a trial using run_case function
+  timeline.push(
+    run_case(
+      blk_1[key],
+      ["Hormone is absent", "Hormone is present"],
+      blk_1_record
+    )
+  );
+});
 
-timeline.push(oneCase);
+// // Test
+// oneCase = run_case(
+//   blk_1[conditions[0]],
+//   ["Hormone is absent", "Hormone is present"],
+//   blk_1_record
+// );
 
-timeline.push(...block2Instructions); // Add Block 2 instructions
-// Add Block 2 trials here
+// timeline.push(oneCase);
+
+// Block 2 instructions
+timeline.push(...block2Instructions);
+
+// Block 2 trials here
+Object.keys(blk_2).forEach((key) => {
+  // For each key in blk_1, create a trial using run_case function
+  timeline.push(
+    run_case(
+      blk_2[key],
+      ["Neurotransmitter is absent", "Neurotransmitter is present"],
+      blk_2_record
+    )
+  );
+});
+
+timeline.push({
+  // In the newer versions of jsPsych, instead of type: "html-keyboard-response",
+  // use:
+  type: jsPsychHtmlKeyboardResponse,
+  stimulus:
+    '<div style="font-size: 24px;">You have reached the end of the experiment. Thank you for your participation. Press any key to exit.</div>',
+  choices: [" "],
+});
 
 // [disp] Check the timeline
 console.log("Timeline:", timeline);
@@ -1201,6 +934,13 @@ console.log("Timeline:", timeline);
 //   },
 // });
 
+// #endregion
+
+// =================================================================================================================
+//                                                  Run Experiment
+// =================================================================================================================
+// region Run Experiment
+
 // Initialize and run the experiment (new method?)
 var psych = initJsPsych({
   on_finish: () => {
@@ -1210,55 +950,20 @@ var psych = initJsPsych({
 
 psych.run(timeline);
 
-// // Method 2
-// // Function to display text instructions using jsPsych
-// function showInstructions(instructions) {
-//   let timeline = [];
-//   instructions.forEach((instruction) => {
-//     let trial = {
-//       type: "html-keyboard-response",
-//       stimulus: `<p>${instruction}</p><p>Press space to continue.</p>`,
-//       choices: [" "],
-//     };
-//     timeline.push(trial);
-//   });
-//   initJsPsych({
-//     timeline: timeline,
-//     on_finish: function () {
-//       jsPsych.data.displayData();
-//     },
-//   });
-// }
-
-// // Call the function with instructions for block 1
-// showInstructions(instructions_1);
-
-// // Call the function with instructions for block 2 (if needed)
-// // showInstructions(instructions_2);
-
-//
-//
-//
-//
-//
-//
-//
-//
 //
 
-// Initialize experiment after loading data
-// async function initExperiment() {
-//   await loadCSVData();
+/* create timeline */
+// var timeline = [];
+/* init connection with pavlovia.org */
+// const pavlovia_init = {
+//   type: "jsPsychPavlovia",
+//   command: "init",
+// };
+// timeline.push(pavlovia_init);
 
-//   // Initialize jsPsych
-//   const jsPsych = initJsPsych({
-//     on_finish: () => jsPsych.data.displayData(),
-//   });
-
-// ... rest of experiment timeline will go here ...
-// }
-
-// Start the experiment
-// initExperiment();
-
-// TODO : add counterbalancing for the order of the blocks
+/* finish connection with pavlovia.org */
+// var pavlovia_finish = {
+//   type: "pavlovia",
+//   command: "finish",
+// };
+// timeline.push(pavlovia_finish);
