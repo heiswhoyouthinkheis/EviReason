@@ -281,23 +281,23 @@ console.log("input_list_h:", input_list_h);
 // region Text Function
 
 function setTextH(varA, varB, nA, nB, CorEA, CorEB, tar, name) {
-  const partA = `You know that the presence of ${varA} is a ${CorEA} of ${tar}.
+  const partA = `You know that the presence of ${varA} is a ${CorEA} of ${tar}. \n\n
 
-In 100 Groblins, on average, 5 of them has ${tar}.
-In 100 Groblins who have ${varA}, ${nA} of them also have ${tar}.
-In 100 Groblins who do not have ${varA}, 2 of them have ${tar}.
-In 100 Groblins, on average, 5 of them have ${varA}.
+In 100 Groblins, on average, 5 of them has ${tar}. \n
+In 100 Groblins who have ${varA}, ${nA} of them also have ${tar}. \n
+In 100 Groblins who do not have ${varA}, 2 of them have ${tar}. \n
+In 100 Groblins, on average, 5 of them have ${varA}. \n\n
 
-A Groblin, named ${name}, has ${varA}.
+A Groblin, named ${name}, has ${varA}.\n
 How likely do you think that ${name} has ${tar}?`;
 
-  const partB = `You also know that the presence of ${varB} is a ${CorEB} of ${tar}.
+  const partB = `You also know that the presence of ${varB} is a ${CorEB} of ${tar}. \n\n
 
-In 100 Groblins who have ${varB}, ${nB} of them also have ${tar}.
-In 100 Groblins who do not have ${varA}, 2 of them have ${tar}.
-In 100 Groblins, on average, 5 of them have ${varB}.
+In 100 Groblins who have ${varB}, ${nB} of them also have ${tar}. \n
+In 100 Groblins who do not have ${varA}, 2 of them have ${tar}. \n
+In 100 Groblins, on average, 5 of them have ${varB}. \n\n
 
-Now with further investigation, you found that ${name} also has ${varB}.
+Now with further investigation, you found that ${name} also has ${varB}. \n
 How likely do you think that ${name} has ${tar}?`;
 
   const var1 = varA[0];
@@ -998,7 +998,7 @@ function run_case(case_info, slider_text, blk_id_record) {
     */
     .case-container {
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
       height: 100vh;
       justify-content: space-evenly; /* space them out vertically */
       align-items: center;           /* center them horizontally */
@@ -1014,7 +1014,7 @@ function run_case(case_info, slider_text, blk_id_record) {
       padding: 20px;
       box-sizing: border-box;
       display: flex;
-      flex-direction: row;
+      flex-direction: column;
       justify-content: flex-start;
       align-items: flex-start;
       gap: 20px; /* spacing between image and text */
@@ -1033,7 +1033,7 @@ function run_case(case_info, slider_text, blk_id_record) {
     .subcase-image {
       max-width: 300px;
       height: auto;
-    }
+    } 
 
     .slider-container {
       margin-top: 10px;
