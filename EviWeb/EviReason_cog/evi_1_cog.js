@@ -956,12 +956,64 @@ console.log("Timeline:", timeline);
 // =================================================================================================================
 // region Run Experiment
 
-// Initialize and run the experiment (new method?)
-var psych = initJsPsych({
+function combineBlockData(blk1, blk2) {
+  return {
+    block1_strength: blk1.strength,
+    block1_value: blk1.value,
+    block1_info_order: blk1.info_order,
+    block1_probabilities: blk1.probabilities,
+
+    block2_strength: blk2.strength,
+    block2_value: blk2.value,
+    block2_info_order: blk2.info_order,
+    block2_probabilities: blk2.probabilities,
+  };
+}
+
+// Combine your block data
+const finalDataObject = combineBlockData(blk_1_record, blk_2_record);
+
+// Initialize jsPsych
+const psych = initJsPsych({
   show_progress_bar: true,
   on_finish: () => {
+    // 1) Add your combined dictionary to the jsPsych data store
+    jsPsych.data.addProperties(finalDataObject);
+
+    // 2) (Optional) Display data for debugging
     psych.data.displayData();
+
+    // cognition.run will automatically store jsPsych’s data,
+    // so you do not need a special plugin or upload step.
   },
 });
 
-psych.run(timeline);
+// Initialize and run the experiment (new method?)
+// var psych = initJsPsych({
+//   show_progress_bar: true,
+//   on_finish: () => {
+//     psych.data.displayData();
+//   },
+// });
+
+// psych.run(timeline);
+
+// function dictToCSV(dict) {
+//   // Start with a header row
+//   let csv = "key,value\n";
+
+//   // For each key-value pair, add a row
+//   for (const [k, v] of Object.entries(dict)) {
+//     csv += `${k},${v}\n`;
+//   }
+//   return csv;
+// }
+
+// const csvString = dictToCSV(myDict);
+// console.log(csvString);
+/*
+key,value
+subject_id,S01
+response_time,1234
+accuracy,0.95
+*/
