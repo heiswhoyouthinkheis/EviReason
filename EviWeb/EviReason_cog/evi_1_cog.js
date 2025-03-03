@@ -973,7 +973,7 @@ function combineBlockData(blk1, blk2) {
 // Combine your block data
 const finalDataObject = combineBlockData(blk_1_record, blk_2_record);
 
-// Initialize jsPsych
+// // Initialize jsPsych
 const psych = initJsPsych({
   show_progress_bar: true,
   on_finish: () => {
@@ -988,7 +988,7 @@ const psych = initJsPsych({
   },
 });
 
-// Initialize and run the experiment (new method?)
+//Initialize and run the experiment (new method?)
 // var psych = initJsPsych({
 //   show_progress_bar: true,
 //   on_finish: () => {
@@ -996,7 +996,7 @@ const psych = initJsPsych({
 //   },
 // });
 
-// psych.run(timeline);
+psych.run(timeline);
 
 // function dictToCSV(dict) {
 //   // Start with a header row
