@@ -10,4 +10,5 @@ jobs:
         id: deploy
         with:
           personal-access-token: ${{secrets.PERSONAL_ACCESS_TOKEN}}
+          taskFolder: EviReason_cog
       - run: echo "The public link to the task is ${{ steps.deploy.outputs.link }}"
